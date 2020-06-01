@@ -6,7 +6,7 @@ export function GMTToStr(time) {
     (date.getMonth() + 1) +
     "-" +
     date.getDate() +
-    "-" +
+    " " +
     date.getHours() +
     ":" +
     date.getMinutes() +

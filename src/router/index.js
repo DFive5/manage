@@ -8,12 +8,14 @@ import Layout from "@/layout";
 import NavTest from "./modules/nav-test";
 import { Message } from "element-ui";
 import getTitle from "@/utils/getTitle";
+
 /**
- * hidden:为true时,不在侧边栏显示
- * meta{
- * title:xxx 设置侧边栏名称
- * icon：xxx 设置侧边栏图标
- * noCache：true 不缓存该路由页面
+ * 路由相关属性说明
+ * hidden: 当设置hidden为true时，意思不在sideBars侧边栏中显示
+ * mete{
+ * title: xxx,  设置sideBars侧边栏名称
+ * icon: xxx,  设置ideBars侧边栏图标
+ * noCache: true  当设置为true时不缓存该路由页面
  * }
  */
 
@@ -82,7 +84,7 @@ export const asyncRoutes = [
     path: "/permission",
     name: "Permission",
     component: Layout,
-    redirect: "/permission/page-user",
+    redirect: "/permission/page-use",
     meta: {
       title: "权限许可",
       icon: "el-icon-lock"
@@ -267,14 +269,17 @@ const creatRouter = () => {
 };
 
 const router = creatRouter();
-//解决addRoute不能删除动态路由问题
+
+// 解决addRoute不能删除动态路由问题
 export function resetRouter() {
   const reset = creatRouter();
   router.matcher = reset.matcher;
 }
+
+// 导航守卫
 router.beforeEach(async (to, from, next) => {
   document.title = getTitle(to.meta.title);
-  if (to.path === "./login") {
+  if (to.path === "/login") {
     next();
   } else {
     if (store.getters.token) {
@@ -289,6 +294,9 @@ router.beforeEach(async (to, from, next) => {
             roles
           );
           router.addRoutes(addRoutes);
+
+          // hack method to ensure that addRoutes is complete
+          // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true });
         } catch (error) {
           Message.error(error);

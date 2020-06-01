@@ -8,4 +8,3 @@ export function getPageTab2() {
   const url = "/getPageData2";
   return $axios.get(url);
 }
-//lq

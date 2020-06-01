@@ -1,5 +1,8 @@
+/*
+set sidebar open or close,and some app setting
+ */
 const state = {
-  opended: sessionStorage.getItem("open")
+  opened: sessionStorage.getItem("open")
     ? sessionStorage.getItem("open")
     : "false",
   msgIsShow: false,
@@ -9,7 +12,7 @@ const state = {
 };
 const mutations = {
   SET_OPENED(state, payload) {
-    state.opended = String(payload);
+    state.opened = String(payload);
     sessionStorage.setItem("open", payload);
   },
   SET_MSGISOPEN(state) {
@@ -21,8 +24,7 @@ const mutations = {
   }
 };
 export default {
-  namespaced: true, //局部命名空间
+  namespaced: true,
   state,
   mutations
 };
-//lj

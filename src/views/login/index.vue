@@ -12,21 +12,21 @@
             ref="slideDiv"
           ></slide-verify>
           <div class="iconBtn">
-            <i class="el-icon-circle-close" @click="showSlide = false"></i>
-            <i class="el-icon-refresh" @click="refresh"></i>
+            <i class="el-icon-circle-close" @click="showSlide = false"></i
+            ><i class="el-icon-refresh" @click="refresh"></i>
           </div>
         </div>
       </transition>
     </div>
     <div class="loginBox">
-      <h2 class="loginH2"><strong>Vue</strong>后台管理系统</h2>
+      <h2 class="loginH2"><strong>Vue</strong> 后台管理系统</h2>
       <div class="loginCon">
         <div class="titleDiv">
           <h3>Sign up now</h3>
           <p>Enter your username and password to log on:</p>
           <i class="el-icon-key"></i>
         </div>
-        <el-form ref="loginForm" :model="ruleForm">
+        <el-form ref="loginForm" :rules="rules" :model="ruleForm">
           <el-form-item prop="user">
             <el-input
               placeholder="请输入账号"
@@ -62,7 +62,7 @@ export default {
       notifyObj: null,
       text: "向右滑动",
       showSlide: false,
-      ruleFrom: {
+      ruleForm: {
         user: "admin",
         password: "123456"
       },
@@ -100,7 +100,7 @@ export default {
     },
     _login() {
       this.$store
-        .dispatch("user/_login", this.ruleFrom)
+        .dispatch("user/_login", this.ruleForm)
         .then(res => {
           if (!res.data.success) {
             this.refresh();
@@ -125,15 +125,14 @@ export default {
         duration: 0,
         iconClass: "el-icon-s-opportunity"
       });
-    },
-    components: {
-      SlideVerify
     }
+  },
+  components: {
+    SlideVerify
   }
 };
 </script>
-
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .login {
   height: 100%;
   width: 100%;

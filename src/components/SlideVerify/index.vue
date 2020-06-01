@@ -1,5 +1,5 @@
 <template>
-  <div class="slider-verify" id="slideVerify" onselectstart="return false;">
+  <div class="slide-verify" id="slideVerify" onselectstart="return false;">
     <canvas :width="w" :height="h" ref="canvas"></canvas>
     <div @click="refresh" class="slide-verify-refresh-icon"></div>
     <canvas
@@ -27,6 +27,7 @@
           class="slide-verify-slider-mask-item"
           :style="{ left: sliderLeft }"
         >
+          <!-- <div class="slide-verify-slider-mask-item-icon"></div> -->
           <i class="el-icon-arrow-right"></i>
         </div>
       </div>
@@ -36,30 +37,36 @@
 </template>
 <script>
 const PI = Math.PI;
+
 function sum(x, y) {
   return x + y;
 }
+
 function square(x) {
   return x * x;
 }
 export default {
   name: "SlideVerify",
   props: {
+    // block length
     l: {
       type: Number,
       default: 42
     },
+    // block radius
     r: {
       type: Number,
       default: 10
     },
+    // canvas width
     w: {
       type: Number,
       default: 310
     },
+    // canvas height
     h: {
       type: Number,
-      default: 135
+      default: 155
     },
     sliderText: {
       type: String,
@@ -68,9 +75,9 @@ export default {
   },
   data() {
     return {
-      containerActive: false,
-      containerSuccess: false,
-      containerFail: false,
+      containerActive: false, // container active class
+      containerSuccess: false, // container success class
+      containerFail: false, // container fail class
       canvasCtx: null,
       blockCtx: null,
       block: null,
@@ -187,6 +194,7 @@ export default {
         this.sliderLeft = moveX + "px";
         let blockLeft = ((this.w - 40 - 20) / (this.w - 40)) * moveX;
         this.block.style.left = blockLeft + "px";
+
         this.containerActive = true; // add active
         this.sliderMaskWidth = moveX + "px";
         this.trail.push(moveY);
@@ -196,6 +204,7 @@ export default {
         this.isMouseDown = false;
         if (e.clientX === this.originX) return false;
         this.containerActive = false; // remove active
+
         const { spliced, TuringTest } = this.verify();
         if (spliced) {
           if (TuringTest) {
@@ -224,6 +233,7 @@ export default {
       this.sliderLeft = moveX + "px";
       let blockLeft = ((this.w - 40 - 20) / (this.w - 40)) * moveX;
       this.block.style.left = blockLeft + "px";
+
       this.containerActive = true;
       this.sliderMaskWidth = moveX + "px";
       this.trail.push(moveY);
@@ -233,6 +243,7 @@ export default {
       this.isMouseDown = false;
       if (e.changedTouches[0].pageX === this.originX) return false;
       this.containerActive = false;
+
       const { spliced, TuringTest } = this.verify();
       if (spliced) {
         if (TuringTest) {
@@ -275,6 +286,7 @@ export default {
       this.canvasCtx.clearRect(0, 0, w, h);
       this.blockCtx.clearRect(0, 0, w, h);
       this.block.width = w;
+
       // generate img
       this.img.src = this.getRandomImg();
     }
@@ -286,11 +298,13 @@ export default {
   position: relative;
   width: 310px;
 }
+
 .slide-verify-block {
   position: absolute;
   left: 0;
   top: 0;
 }
+
 /* .slide-verify-refresh-icon {
   position: absolute;
   right: 0;
@@ -301,6 +315,7 @@ export default {
   background: url('../assets/icon_light.png') 0 -437px;
   background-size: 34px 471px;
 } */
+
 .slide-verify-slider {
   position: relative;
   text-align: center;
@@ -312,6 +327,7 @@ export default {
   color: #45494c;
   border: 1px solid #e4e7eb;
 }
+
 .slide-verify-slider-mask {
   position: absolute;
   left: 0;
@@ -320,6 +336,7 @@ export default {
   border: 0 solid #1991fa;
   background: #d1e9fe;
 }
+
 .slide-verify-slider-mask-item {
   position: absolute;
   top: 0;
@@ -331,12 +348,15 @@ export default {
   cursor: pointer;
   transition: background 0.2s linear;
 }
+
 .slide-verify-slider-mask-item:hover {
   background: #1991fa;
 }
+
 .slide-verify-slider-mask-item:hover .slide-verify-slider-mask-item-icon {
   background-position: 0 -13px;
 }
+
 /* .slide-verify-slider-mask-item-icon {
   position: absolute;
   top: 15px;
@@ -351,39 +371,47 @@ export default {
   top: -1px;
   border: 1px solid #1991fa;
 }
+
 .container-active .slide-verify-slider-mask {
   height: 38px;
   border-width: 1px;
 }
+
 .container-success .slide-verify-slider-mask-item {
   height: 38px;
   top: -1px;
   border: 1px solid #52ccba;
   background-color: #52ccba !important;
 }
+
 .container-success .slide-verify-slider-mask {
   height: 38px;
   border: 1px solid #52ccba;
   background-color: #d2f4ef;
 }
+
 .container-success .slide-verify-slider-mask-item-icon {
   background-position: 0 0 !important;
 }
+
 .container-fail .slide-verify-slider-mask-item {
   height: 38px;
   top: -1px;
   border: 1px solid #f57a7a;
   background-color: #f57a7a !important;
 }
+
 .container-fail .slide-verify-slider-mask {
   height: 38px;
   border: 1px solid #f57a7a;
   background-color: #fce1e1;
 }
+
 .container-fail .slide-verify-slider-mask-item-icon {
   top: 14px;
   background-position: 0 -82px !important;
 }
+
 .container-active .slide-verify-slider-text,
 .container-success .slide-verify-slider-text,
 .container-fail .slide-verify-slider-text {

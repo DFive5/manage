@@ -15,6 +15,4 @@ const getters = {
   msgIsShow: state => state.app.msgIsShow,
   showDriver: state => state.app.showDriver
 };
-
 export default getters;
-//lq

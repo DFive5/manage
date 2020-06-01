@@ -4,7 +4,7 @@ const resolve = function(dir) {
 };
 //解析当前文件的绝对路径
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/manage/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
   outputDir: "dist",
   assetsDir: "static",
   lintOnSave: true, // 是否开启eslint保存检测

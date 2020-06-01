@@ -3,4 +3,3 @@ export function getAllRolse() {
   const url = "/getRoles";
   return $axios.get(url);
 }
-//lq

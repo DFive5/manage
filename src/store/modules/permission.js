@@ -10,12 +10,12 @@ const mutations = {
     state.addRoutes = payload;
   }
 };
-//遍历asyncRoutes动态路由
+// 遍历asyncRoutes动态路由
 function forSearchArr(route, roles) {
   let arrNew = [];
   for (let item of route) {
     let itemNew = { ...item }; //解决浅拷贝共享同一内存地址
-    if (roles.incluedes(itemNew.name)) {
+    if (roles.includes(itemNew.name)) {
       if (itemNew.children) {
         itemNew.children = forSearchArr(itemNew.children, roles);
       }
@@ -28,7 +28,7 @@ const actions = {
   getAsyncRoutes({ commit, rootGetters }, roles) {
     return new Promise(resolve => {
       let routes = [];
-      if (rootGetters.username === "admin") {
+      if (rootGetters.userName === "admin") {
         routes = asyncRoutes || "";
       } else {
         routes = forSearchArr(asyncRoutes, roles);
@@ -38,10 +38,10 @@ const actions = {
     });
   }
 };
+
 export default {
   namespaced: true,
   state,
   mutations,
   actions
 };
-//lq

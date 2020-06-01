@@ -16,4 +16,3 @@ export function getBarData() {
   const url = "/getBarData";
   return $axios.get(url);
 }
-//lq

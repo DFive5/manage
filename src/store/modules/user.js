@@ -3,7 +3,7 @@ import { Message } from "element-ui";
 import router, { resetRouter } from "@/router";
 
 const state = {
-  token: localStorage.getItem("token") ? localStorage.getItem("token") : "", //认证凭证
+  token: localStorage.getItem("token") ? localStorage.getItem("token") : "", // 认证凭证'
   userName: "",
   roles: [],
   introduce: ""
@@ -31,6 +31,7 @@ const mutations = {
   }
 };
 const actions = {
+  // user login
   _login({ commit }, formdatas) {
     return new Promise((resolve, reject) => {
       login(formdatas)
@@ -49,7 +50,7 @@ const actions = {
           reject(error);
         });
     });
-  }, //提交信息，并设置token
+  },
   loginOut({ commit }) {
     commit("DEL_TOKEN");
     resetRouter();
@@ -59,7 +60,7 @@ const actions = {
         redirect: "/"
       }
     });
-  }, //注销并清除token
+  },
   _getInfo({ commit }) {
     return new Promise((resolve, reject) => {
       getInfo()
@@ -79,11 +80,10 @@ const actions = {
         });
     });
   }
-}; //返回个人信息，并设置各种信息
+};
 export default {
   namespaced: true,
   state,
   mutations,
   actions
 };
-//lq

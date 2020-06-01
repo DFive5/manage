@@ -3,7 +3,7 @@ const navTest = {
   path: "/nav-test",
   component: Layout,
   name: "NavTest",
-  meta: { title: "导航菜单栏", icon: "el-icon-s-grid" },
+  meta: { title: "导航菜单测试", icon: "el-icon-s-grid" },
   redirect: "/nav-test/nav1",
   children: [
     {
@@ -51,4 +51,3 @@ const navTest = {
   ]
 };
 export default navTest;
-//lq
