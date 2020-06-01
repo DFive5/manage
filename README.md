@@ -23,4 +23,4 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### [manage] (101.132.155.236:4003)
+### [manage](101.132.155.236:4003)
