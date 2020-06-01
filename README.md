@@ -24,4 +24,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Online address 
-[百度](www.baidu.com)
+[manage](http://101.132.155.236:4003)
